@@ -1,0 +1,31 @@
+body{
+    background-image: url('../img/fond.png');
+}
+.login{
+    /* border: solid; */
+    border-radius: 20px;
+    margin-top: 150px;
+    margin-left: 200px;
+    margin-right: 200px;
+    box-shadow: 0px 0px 0px 2px rgb(147, 155, 147);
+}
+.login input{
+    margin-top: 20px;
+    margin-left: 200px;
+    text-align: center;
+    height: 40px;
+}
+.input input{
+    width: 370px;
+}
+.input a{
+    margin-left: 300px;
+    text-decoration: none;
+}
+h2{
+    padding-top: 20px;
+    margin-left: 250px;
+}
+
+
+
