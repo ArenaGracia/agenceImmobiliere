@@ -1,5 +1,4 @@
 <?php
-
     function getConnection(){
         $_hote='localhost';     // le chemin vers le serveur
         $_port='3306';
@@ -16,5 +15,4 @@
             die();
         }
     }
-
 ?>

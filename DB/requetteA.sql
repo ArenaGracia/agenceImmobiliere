@@ -1,21 +1,34 @@
-CREATE DATABASE Agence;
-USE Agence;
+<<<<<<< HEAD
+DROP USER Agence Cascade;
+CREATE USER Agence IDENTIFIED BY immo;
+GRANT DBA TO Agence;
+=======
+CREATE USER Agence identified by immo;
+GRANT dba TO Agence;
+>>>>>>> Arena
+CONNECT Agence/immo;
 
 -- User
-CREATE TABLE User(
+CREATE TABLE Utilisateur(
     id_U INTEGER PRIMARY KEY,
     email VARCHAR(30),
     nom VARCHAR(30),
     mdp   VARCHAR(30),
-    num  VARCHAR(30)
+    num   VARCHAR(30)
 );
-DROP VIEW id_user;
-CREATE VIEW id_user  AS SELECT COUNT(*)+1 FROM User;
+<<<<<<< HEAD
+CREATE OR REPLACE VIEW id_utilisateur  AS SELECT COUNT(*)+1 c FROM Utilisateur;
 
-INSERT INTO User VALUES((SELECT *FROM id_user),"Arena","arena@gmail.com","arena","032 41 456 89");
-INSERT INTO User VALUES((SELECT *FROM id_user),"Nancy","nancy@gmail.com","nancy","032 42 456 89");
-INSERT INTO User VALUES((SELECT *FROM id_user),"David","david@gmail.com","david","032 43 456 89");
-INSERT INTO User VALUES((SELECT *FROM id_user),"Johan","johan@gmail.com","johan","032 44 456 89");
+INSERT INTO Utilisateur VALUES((SELECT *FROM id_utilisateur),'Arena','arena@gmail.com','arena1','032 41 456 89');
+=======
+
+CREATE OR REPLACE VIEW id_utilisateur  AS SELECT COUNT(*)+1 c FROM Utilisateur;
+
+INSERT INTO Utilisateur VALUES((SELECT *FROM id_utilisateur),'Arena','arena@gmail.com','arena','032 41 456 89');
+>>>>>>> Arena
+INSERT INTO Utilisateur VALUES((SELECT *FROM id_utilisateur),'Nancy','nancy@gmail.com','nancy','032 42 456 89');
+INSERT INTO Utilisateur VALUES((SELECT *FROM id_utilisateur),'David','david@gmail.com','david','032 43 456 89');
+INSERT INTO Utilisateur VALUES((SELECT *FROM id_utilisateur),'Johan','johan@gmail.com','johan','032 44 456 89');
 
 
 -- SuperUser
@@ -26,22 +39,22 @@ CREATE TABLE SuperUser(
     mdp   VARCHAR(30),
     num  VARCHAR(30)  
 );
-DROP VIEW id_SuperUser;
-CREATE VIEW id_SuperUser  AS SELECT COUNT(*)+1 FROM SuperUser;
 
-INSERT INTO SuperUser VALUES((SELECT *FROM id_SuperUser),"Mimi","mimi@gmail.com","mimi","034 12 123 45");
+CREATE OR REPLACE VIEW id_SuperUser  AS SELECT COUNT(*)+1 c FROM SuperUser;
+
+INSERT INTO SuperUser VALUES((SELECT *FROM id_SuperUser),'Mimi','mimi@gmail.com','mimi','034 12 123 45');
 
 -- Type Habitations
 CREATE TABLE Type_h(
     id_t INTEGER PRIMARY KEY,
     nom VARCHAR(30)    
 );
-DROP VIEW id_type;
-CREATE VIEW id_type AS SELECT COUNT(*)+1 FROM Type_h;
 
-INSERT INTO Type_h VALUES((SELECT *FROM id_type),"Maison");
-INSERT INTO Type_h VALUES((SELECT *FROM id_type),"Studio");
-INSERT INTO Type_h VALUES((SELECT *FROM id_type),"Appartements");
+CREATE OR REPLACE VIEW id_type AS SELECT COUNT(*)+1 c FROM Type_h;
+
+INSERT INTO Type_h VALUES((SELECT *FROM id_type),'Maison');
+INSERT INTO Type_h VALUES((SELECT *FROM id_type),'Studio');
+INSERT INTO Type_h VALUES((SELECT *FROM id_type),'Appartements');
 
 -- Habitations
 CREATE TABLE Habitation(
@@ -49,13 +62,13 @@ CREATE TABLE Habitation(
     id_t INTEGER,
     nb_chambre INTEGER,
     quartier VARCHAR(50),
-    FOREIGN KEY (id_t) REFERENCES Habitation(id_t) 
+    FOREIGN KEY (id_t) REFERENCES Type_h(id_t) 
 );
-DROP VIEW id_habit;
-CREATE VIEW id_habit AS SELECT COUNT(*)+1 FROM Habitation;
 
-INSERT INTO Habitation VALUES((SELECT *FROM id_habit),1,2,"Antananarivo");
-INSERT INTO Habitation VALUES((SELECT *FROM id_habit),3,4,"Antsirabe");
+CREATE OR REPLACE VIEW id_habit AS SELECT COUNT(*)+1 c FROM Habitation;
+
+INSERT INTO Habitation VALUES((SELECT *FROM id_habit),1,2,'Antananarivo');
+INSERT INTO Habitation VALUES((SELECT *FROM id_habit),3,4,'Antsirabe');
 
 -- Photo habitation
 CREATE TABLE Photo_h(
