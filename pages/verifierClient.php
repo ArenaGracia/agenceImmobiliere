@@ -7,7 +7,6 @@
 
 
     $_SESSION['user'] = $val['id_U'][0];
-    $_SESSION['value']=0;
 
     if(est_connect($_SESSION['user']))
     {

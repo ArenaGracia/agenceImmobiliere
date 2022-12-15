@@ -49,6 +49,98 @@
         return $result;   
     }
 
+    function ListHabitat()
+    {
+        $connexion = getConnection();
+        $sql="SELECT*FROM listeHabitat";
+        $resultats=$connexion->query($sql);
+        $resultats->setFetchMode(PDO::FETCH_OBJ);
+        $result = array();
+        $result['nom'] = array();
+        $result['nom_p'] = array();
+        $result['quartier'] = array();
+        $result['id_h'] = array();
+        $result['montant'] = array();
+        $result['descriptions'] = array();
+        while( $ligne = $resultats->fetch()) // on récupère la liste des habitations
+        {
+            $result['nom'][] = $ligne->nom;
+            $result['nom_p'][] = $ligne->nom_p;
+            $result['quartier'][] = $ligne->quartier;
+            $result['id_h'][] = $ligne->id_h;
+            $result['montant'][] = $ligne->montant;
+            $result['descriptions'][] = $ligne->descriptions;
+        }
+        $resultats->closeCursor(); // on ferme le curseur des résultats
+        return $result;   
+    }
+
+    function ListHabitatById($id)
+    {
+        $connexion = getConnection();
+        $sql="SELECT*FROM listeHabitat WHERE id_h=$id";
+        $resultats=$connexion->query($sql);
+        $resultats->setFetchMode(PDO::FETCH_OBJ);
+        $result = array();
+        $result['nom'] = array();
+        $result['nom_p'] = array();
+        $result['quartier'] = array();
+        $result['id_h'] = array();
+        $result['montant'] = array();
+        $result['descriptions'] = array();
+        while( $ligne = $resultats->fetch()) // on récupère la liste des habitations
+        {
+            $result['nom'][] = $ligne->nom;
+            $result['nom_p'][] = $ligne->nom_p;
+            $result['quartier'][] = $ligne->quartier;
+            $result['id_h'][] = $ligne->id_h;
+            $result['montant'][] = $ligne->montant;
+            $result['descriptions'][] = $ligne->descriptions;
+        }
+        $resultats->closeCursor(); // on ferme le curseur des résultats
+        return $result;   
+    }
+
+    function getImages($id){
+        $connexion = getConnection();
+        $sql="SELECT*FROM photo_h WHERE id_h=$id";
+        $resultats=$connexion->query($sql);
+        $resultats->setFetchMode(PDO::FETCH_OBJ);  
+        $result = array();
+        $result['nom_p'] = array();  
+        while( $ligne = $resultats->fetch()) // on récupère la liste des images par habitations
+        {
+            $result['nom_p'][] = $ligne->nom_p;
+        } 
+        $resultats->closeCursor(); // on ferme le curseur des résultats
+        return $result;      
+    }
+
+    function searchHabitat($string){
+        $connexion = getConnection();
+        $sql="SELECT * FROM ListeHabitat WHERE descriptions LIKE '%$string%'";
+        $resultats=$connexion->query($sql);
+        $resultats->setFetchMode(PDO::FETCH_OBJ);
+        $result = array();
+        $result['nom'] = array();
+        $result['nom_p'] = array();
+        $result['quartier'] = array();
+        $result['id_h'] = array();
+        $result['montant'] = array();
+        $result['descriptions'] = array();
+        while( $ligne = $resultats->fetch()) // on récupère la liste des habitations par la recherche
+        {
+            $result['nom'][] = $ligne->nom;
+            $result['nom_p'][] = $ligne->nom_p;
+            $result['quartier'][] = $ligne->quartier;
+            $result['id_h'][] = $ligne->id_h;
+            $result['montant'][] = $ligne->montant;
+            $result['descriptions'][] = $ligne->descriptions;
+        }
+        $resultats->closeCursor(); // on ferme le curseur des résultats
+        return $result;  
+    }
+
     function est_connect($c){
         session_start();
         $_SESSION['user']=$c;

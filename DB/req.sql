@@ -85,3 +85,29 @@ CREATE TABLE Reservation(
     nb_personne INTEGER
 );
 
+INSERT INTO Photo_h VALUES(1,"image1.jpg");
+INSERT INTO Photo_h VALUES(1,"image2.jpg");
+INSERT INTO Photo_h VALUES(1,"image3.jpg");
+
+INSERT INTO Photo_h VALUES(2,"antsirabe1.jpg");
+INSERT INTO Photo_h VALUES(2,"antsirabe2.jpg");
+INSERT INTO Photo_h VALUES(2,"antsirabe3.jpg");
+
+INSERT INTO Loyer VALUES(1,230.50,'2022-09-12');
+INSERT INTO Loyer VALUES(2,150.50,'2022-09-12');
+
+INSERT INTO description_h VALUES(1,"Maison avec une vue en plein air");
+INSERT INTO description_h VALUES(2,"Appartement avec un acces piscine");
+
+
+
+CREATE OR REPLACE View ListeHabitat AS
+SELECT t.nom,ph.nom_p,h.quartier,h.id_h,l.montant,d.descriptions
+    FROM Habitation h 
+    JOIN Photo_h ph ON ph.id_h=h.id_h
+    JOIN Type_h t ON h.id_t=t.id_t
+    JOIN Loyer l ON h.id_h=l.id_h
+    JOIN description_h d ON h.id_h=d.id_h
+GROUP BY h.id_h;
+
+
