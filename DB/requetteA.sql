@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 DROP USER Agence Cascade;
 CREATE USER Agence IDENTIFIED BY immo;
 GRANT DBA TO Agence;
+=======
+CREATE USER Agence identified by immo;
+GRANT dba TO Agence;
+>>>>>>> Arena
 CONNECT Agence/immo;
 
 -- User
@@ -11,9 +16,16 @@ CREATE TABLE Utilisateur(
     mdp   VARCHAR(30),
     num   VARCHAR(30)
 );
+<<<<<<< HEAD
 CREATE OR REPLACE VIEW id_utilisateur  AS SELECT COUNT(*)+1 c FROM Utilisateur;
 
 INSERT INTO Utilisateur VALUES((SELECT *FROM id_utilisateur),'Arena','arena@gmail.com','arena1','032 41 456 89');
+=======
+
+CREATE OR REPLACE VIEW id_utilisateur  AS SELECT COUNT(*)+1 c FROM Utilisateur;
+
+INSERT INTO Utilisateur VALUES((SELECT *FROM id_utilisateur),'Arena','arena@gmail.com','arena','032 41 456 89');
+>>>>>>> Arena
 INSERT INTO Utilisateur VALUES((SELECT *FROM id_utilisateur),'Nancy','nancy@gmail.com','nancy','032 42 456 89');
 INSERT INTO Utilisateur VALUES((SELECT *FROM id_utilisateur),'David','david@gmail.com','david','032 43 456 89');
 INSERT INTO Utilisateur VALUES((SELECT *FROM id_utilisateur),'Johan','johan@gmail.com','johan','032 44 456 89');
