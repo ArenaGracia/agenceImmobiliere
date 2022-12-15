@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 DROP USER Agence Cascade;
 CREATE USER Agence IDENTIFIED BY immo;
 GRANT DBA TO Agence;
@@ -26,6 +27,11 @@ CREATE TABLE Users(
 CREATE USER Agence identified BY immo;
 GRANT dba to Agence;
 Connect Agence/immo; 
+=======
+CREATE USER Agence identified by immo;
+GRANT dba TO Agence;
+CONNECT Agence/immo;
+>>>>>>> Arena
 
 -- User
 CREATE TABLE Utilisateur(
@@ -55,7 +61,7 @@ INSERT INTO Users VALUES((SELECT *FROM id_user),'Johan','johan@gmail.com','johan
 >>>>>>> cc79a8e8a2def5e6c3d9b375e80623418f9c7e05
 =======
 
-CREATE VIEW id_utilisateur  AS SELECT COUNT(*)+1 c FROM Utilisateur;
+CREATE OR REPLACE VIEW id_utilisateur  AS SELECT COUNT(*)+1 c FROM Utilisateur;
 
 INSERT INTO Utilisateur VALUES((SELECT *FROM id_utilisateur),'Arena','arena@gmail.com','arena','032 41 456 89');
 INSERT INTO Utilisateur VALUES((SELECT *FROM id_utilisateur),'Nancy','nancy@gmail.com','nancy','032 42 456 89');
@@ -84,7 +90,7 @@ CREATE VIEW id_SuperUser  AS SELECT (COUNT(*)+1) AS id_Su FROM SuperUser;
 >>>>>>> cc79a8e8a2def5e6c3d9b375e80623418f9c7e05
 =======
 
-CREATE VIEW id_SuperUser  AS SELECT COUNT(*)+1 c FROM SuperUser;
+CREATE OR REPLACE VIEW id_SuperUser  AS SELECT COUNT(*)+1 c FROM SuperUser;
 
 >>>>>>> Arena
 INSERT INTO SuperUser VALUES((SELECT *FROM id_SuperUser),'Mimi','mimi@gmail.com','mimi','034 12 123 45');
@@ -106,7 +112,7 @@ CREATE VIEW id_type AS SELECT (COUNT(*)+1) AS id_t FROM Type_h;
 >>>>>>> cc79a8e8a2def5e6c3d9b375e80623418f9c7e05
 =======
 
-CREATE VIEW id_type AS SELECT COUNT(*)+1 c FROM Type_h;
+CREATE OR REPLACE VIEW id_type AS SELECT COUNT(*)+1 c FROM Type_h;
 
 >>>>>>> Arena
 INSERT INTO Type_h VALUES((SELECT *FROM id_type),'Maison');
@@ -133,7 +139,7 @@ CREATE VIEW id_habit AS SELECT (COUNT(*)+1) AS id_h FROM Habitation;
 >>>>>>> cc79a8e8a2def5e6c3d9b375e80623418f9c7e05
 =======
 
-CREATE VIEW id_habit AS SELECT COUNT(*)+1 c FROM Habitation;
+CREATE OR REPLACE VIEW id_habit AS SELECT COUNT(*)+1 c FROM Habitation;
 
 >>>>>>> Arena
 INSERT INTO Habitation VALUES((SELECT *FROM id_habit),1,2,'Antananarivo');
