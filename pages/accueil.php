@@ -1,5 +1,6 @@
 <?php
     $page = (!isset($_GET['p']))?"liste":$_GET['p'];
+    session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/bootstrap/bootstrap.css">
-    <link rel="stylesheet" href="../assets/fonts/glyphicons-halflings-regular.woff">
+    <link href="../assets/fonts/glyphicons-halflings-regular.woff">
     <link rel="stylesheet" href="../assets/css/accueil.css">
     <title>Document</title>
 </head>
@@ -23,7 +24,7 @@
                             <li role="presentation" class="<?php if($page == "deconnect") echo "active"; ?>"><a href="accueil.php?p=deconnect"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true" id="icon"></span></a></li>        
                     </ul>
                     
-                    <form class="navbar-form navbar-left" role="search" action="" method="get">
+                    <form class="navbar-form navbar-left" role="search" action="accueil?p=search" method="post" id="search">
                         <div class="form-group" id="input1">
                             <input type="text" class="form-control" placeholder="Search" name="search" required>
                         </div>
@@ -35,7 +36,11 @@
 
        <div class="row">
 			<?php include($page.'.php'); ?>
-        </div>       
+        </div>      
+        
+        <!-- <div class="row" id="div4">
+
+        </div> -->
    
 </body>
 </html>
