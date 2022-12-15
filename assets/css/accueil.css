@@ -25,3 +25,10 @@ table{
 #input1 input{
     width: 290px;
 }
+.maison{
+    margin-left: 80px;
+    margin-right: 100px;
+}
+.row{
+    margin-left: 10px;
+}

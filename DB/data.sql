@@ -1,6 +1,6 @@
-CREATE USER Agence identified BY immo;
-GRANT dba to Agence;
-Connect Agence/immo; 
+CREATE USER Agence identified by immo;
+GRANT dba TO Agence;
+CONNECT Agence/immo;
 
 -- User
 CREATE TABLE Utilisateur(
@@ -11,7 +11,7 @@ CREATE TABLE Utilisateur(
     num  VARCHAR(30)
 );
 
-CREATE VIEW id_utilisateur  AS SELECT COUNT(*)+1 c FROM Utilisateur;
+CREATE OR REPLACE VIEW id_utilisateur  AS SELECT COUNT(*)+1 c FROM Utilisateur;
 
 INSERT INTO Utilisateur VALUES((SELECT *FROM id_utilisateur),'Arena','arena@gmail.com','arena','032 41 456 89');
 INSERT INTO Utilisateur VALUES((SELECT *FROM id_utilisateur),'Nancy','nancy@gmail.com','nancy','032 42 456 89');
@@ -28,7 +28,7 @@ CREATE TABLE SuperUser(
     num  VARCHAR(30)  
 );
 
-CREATE VIEW id_SuperUser  AS SELECT COUNT(*)+1 c FROM SuperUser;
+CREATE OR REPLACE VIEW id_SuperUser  AS SELECT COUNT(*)+1 c FROM SuperUser;
 
 INSERT INTO SuperUser VALUES((SELECT *FROM id_SuperUser),'Mimi','mimi@gmail.com','mimi','034 12 123 45');
 
@@ -38,7 +38,7 @@ CREATE TABLE Type_h(
     nom VARCHAR(30)    
 );
 
-CREATE VIEW id_type AS SELECT COUNT(*)+1 c FROM Type_h;
+CREATE OR REPLACE VIEW id_type AS SELECT COUNT(*)+1 c FROM Type_h;
 
 INSERT INTO Type_h VALUES((SELECT *FROM id_type),'Maison');
 INSERT INTO Type_h VALUES((SELECT *FROM id_type),'Studio');
@@ -53,7 +53,7 @@ CREATE TABLE Habitation(
     FOREIGN KEY (id_t) REFERENCES Type_h(id_t) 
 );
 
-CREATE VIEW id_habit AS SELECT COUNT(*)+1 c FROM Habitation;
+CREATE OR REPLACE VIEW id_habit AS SELECT COUNT(*)+1 c FROM Habitation;
 
 INSERT INTO Habitation VALUES((SELECT *FROM id_habit),1,2,'Antananarivo');
 INSERT INTO Habitation VALUES((SELECT *FROM id_habit),3,4,'Antsirabe');
