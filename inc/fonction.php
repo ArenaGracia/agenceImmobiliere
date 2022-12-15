@@ -8,7 +8,6 @@
         $connexion->exec($sql);
     }
 
-<<<<<<< HEAD
     function nb_habitation_par_jour($_month,$_year){
         $xy = array();
         $xy[0] = array();
@@ -21,8 +20,7 @@
         return $xy;
     }
 
-    function montant_loyer_par_habitation($_month,$_year){
-=======
+    function montant_loyer_par_habitation($_month,$_year){}
     function verifyClient($email,$mdp){
         $connexion = getConnection();
         $sql="SELECT*FROM USER WHERE email='%s' AND mdp='%s'";
@@ -68,6 +66,5 @@
         session_start();
         $_SESSION['user']=$c;
         return !empty($_SESSION['user']);
->>>>>>> Arena
     }
 ?>
