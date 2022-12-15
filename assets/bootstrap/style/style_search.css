@@ -1,0 +1,17 @@
+#input2{
+    height: 50px;
+    width: 600px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#input3{
+    height: 50px;
+    width: 100px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#ajout{
+    margin-left: 150px;
+}
