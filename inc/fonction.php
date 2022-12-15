@@ -7,4 +7,9 @@
         $sql=sprintf($sql,$email,$nom,$mdp,$num);
         $connexion->exec($sql);
     }
+
+    function nb_habitation_par_jour($_month,$_year){
+    }
+    function montant_loyer_par_habitation($_month,$_year){
+    }
 ?>
