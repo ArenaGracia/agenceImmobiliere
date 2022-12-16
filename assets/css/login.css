@@ -18,6 +18,12 @@ body{
     text-align: center;
     height: 40px;
 }
+select{
+    margin-top: 20px;
+    margin-left: 200px;
+    text-align: center;
+    height: 40px;
+}
 .input input{
     width: 370px;
 }
@@ -33,6 +39,10 @@ body{
 h2{
     padding-top: 20px;
     margin-left: 250px;
+}
+.input{
+    margin-left: 250px;
+    width: 300px;
 }
 
 

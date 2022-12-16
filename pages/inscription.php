@@ -16,7 +16,7 @@
                     <p><input type="email" class="form-control" placeholder="Enter your email" aria-describedby="sizing-addon3" name="email" required></p>
                     <p><input type="text" class="form-control" placeholder="Enter your name" aria-describedby="sizing-addon3" name="name" required></p>
                     <p><input type="password" class="form-control" placeholder="Enter your password" aria-describedby="sizing-addon3" name="pass" required></p>
-                    <p><input type="text" class="form-control" placeholder="Enter your password" aria-describedby="sizing-addon3" name="tel" required></p>
+                    <p><input type="text" class="form-control" placeholder="Enter your phone number" aria-describedby="sizing-addon3" name="tel" required></p>
                 </div>
                     <p class="input"><input type="submit" value="S'inscrire" class="btn btn-success"></p>  
                 

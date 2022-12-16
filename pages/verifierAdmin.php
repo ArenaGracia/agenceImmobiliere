@@ -7,10 +7,10 @@
 
 
     $_SESSION['user'] = $val['id_Su'][0];
-    $_SESSION['value']=1;
 
     if(est_connect($_SESSION['user']))
     {
+        $_SESSION['user']=0;
         header('Location:accueil.php');
     }
     else{

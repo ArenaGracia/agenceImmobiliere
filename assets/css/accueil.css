@@ -32,3 +32,46 @@ table{
 .row{
     margin-left: 10px;
 }
+.div1{
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.div1 img{
+    margin-left: 50px;
+    border-radius: 20px;
+    height: 200px;
+}
+.div2{
+    float: left;
+    font-size: 17px;
+    /* border: solid; */
+    margin-left: 50px;
+    margin-top: 70px;
+}
+.login2{
+    /* border: solid; */
+    border-radius: 20px;
+    margin-left: 200px;
+    margin-right: 200px;
+    box-shadow: 0px 0px 0px 2px rgb(147, 155, 147);
+    padding-bottom: 20px;
+}
+.login2 input{
+    margin-top: 20px;
+    margin-left: 200px;
+    text-align: center;
+    height: 40px;
+}
+#select{
+        margin-top: 20px;
+        margin-left: 400px;
+        text-align: center;
+        width: 200px;
+        height: 40px;
+}
+.input2 input{
+    width: 370px;
+}
+.input2{
+    margin-left: 100px;
+}
