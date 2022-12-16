@@ -9,42 +9,27 @@
         $connexion->exec($sql);
     }
 
-    function insertHabitat($id_t,$nb,$quartier){
-        $connexion = getConnection();
-        $sql="SELECT*FROM id_habit";
-        $resultats=$connexion->query($sql);
-        $resultats->setFetchMode(PDO::FETCH_OBJ);
-        $i=0;
-        while( $ligne = $resultats->fetch()) // on récupère la liste des membres
-        {
-            $i=$ligne->c;
+    function nb_habitation_par_jour($_month,$_year){                // non base
+        $xy[0] = array();
+        $xy[1] = array();
+        for($a = 1 ; $a <= 31 ; $a++){      // 31 jours
+            $xy[0][] = $a;
+            $xy[1][] = $a+10;
         }
-        $resultats->closeCursor(); // on ferme le curseur des résultats
-        $sql="INSERT INTO Habitation VALUES($i,$id_t,$nb,'$quartier')";
-        $connexion->exec($sql);
-        echo $sql;
-        return $i;  
+        return $xy;
+    }
+    function evolution_MTL_J($_month,$_year){                // non base
+        $xy[0] = array();
+        $xy[1] = array();
+        for($a = 1 ; $a <= 31 ; $a++){      // 31 jours
+            $xy[0][] = $a;
+            $xy[1][] = $a+10;
+        }
+        return $xy;
     }
 
-    function insertLoyer($habitat,$loyer,$date){
-        $connexion = getConnection();
-        $sql="INSERT INTO Loyer VALUES($habitat,$loyer,'$date')";
-        echo $sql;
-        $connexion->exec($sql);        
-    }
+    function montant_loyer_par_habitation($_month,$_year){
 
-    function insertDescriptions($habitat,$descri){
-        $connexion = getConnection();
-        $sql="INSERT INTO description_h VALUES($habitat,'$descri')";
-        echo $sql;
-        $connexion->exec($sql);        
-    }
-
-    function insertImages($habitat,$fichier){
-        $connexion = getConnection();
-        $sql="INSERT INTO photo_h VALUES($habitat,'$fichier')";
-        echo $sql;
-        $connexion->exec($sql);        
     }
 
     function verifyClient($email,$mdp){
@@ -180,155 +165,85 @@
         return $result;  
     }
 
-    function suppHabitat($id){
+    function getIdType($name){
         $connexion = getConnection();
-        $sql="DELETE FROM Habitation WHERE id_h=$id";
-        $connexion->exec($sql);
+        $sql="SELECT*FROM Type_h WHERE nom='$name'";
+        $resultats=$connexion->query($sql);
+        $resultats->setFetchMode(PDO::FETCH_OBJ);
+        $id=0;
+        while( $ligne = $resultats->fetch()) // on récupère la liste des habitations par la recherche
+        {
+            $id=$ligne->id_t;
+        }
+        $resultats->closeCursor();
+        return $id;
+    }
+
+    function insertHabitat($id_t,$nb,$quartier)
+    {  
+        $connexion = getConnection();
+        $sql="SELECT*FROM id_habit";
+        $resultats=$connexion->query($sql);
+        $resultats->setFetchMode(PDO::FETCH_OBJ);
+        $id=0;
+        while( $ligne = $resultats->fetch()) // on récupère la liste des habitations par la recherche
+        {
+            $id=$ligne->c;
+        }    
+        $sql="INSERT INTO Habitation VALUES($id,$id_t,$nb,'$quartier')";
+        echo $sql;
+        $resultats->closeCursor();
+        $resultats=$connexion->exec($sql);        
+        return $id;
+    }
+
+    function insertImage($id_h,$url){
+        $connexion = getConnection();
+        $sql="INSERT INTO photo_h VALUES($id_h,'$url')";
+        echo $sql;
+        $resultats=$connexion->exec($sql);
+    }
+
+    function insertLoyer($id_h,$prix,$date){
+        $connexion = getConnection();
+        $sql="INSERT INTO loyer VALUES($id_h,$prix,'$date')";
+        echo $sql;
+        $resultats=$connexion->exec($sql);
+    }
+
+    function insertDescriptions($id_h,$descri){
+        $connexion = getConnection();
+        $sql="INSERT INTO Description_h VALUES($id_h,'$descri')";
+        echo $sql;
+        $resultats=$connexion->exec($sql);
+    }
+
+    function suppHabitat($indice){
+        $connexion = getConnection();
+        $sql="DELETE FROM Habitation WHERE id_h=$indice";
+        $resultats=$connexion->exec($sql);
     }
 
     function getAllType(){
-        $connexion = getConnection();
+        $connexion=getConnection();
         $sql="SELECT * FROM Type_h";
         $resultats=$connexion->query($sql);
         $resultats->setFetchMode(PDO::FETCH_OBJ);
         $result = array();
         $result['id_t'] = array();
         $result['nom'] = array();
-
-
         while( $ligne = $resultats->fetch()) // on récupère la liste des habitations par la recherche
         {
             $result['id_t'][] = $ligne->id_t;
             $result['nom'][] = $ligne->nom;
         }
         $resultats->closeCursor(); // on ferme le curseur des résultats
-        return $result;          
+        return $result; 
     }
-
-    function getInfo($id){
-        $connexion = getConnection();
-        $sql="SELECT * FROM Habitation WHERE id_h=$id";
-        $resultats=$connexion->query($sql);
-        $resultats->setFetchMode(PDO::FETCH_OBJ);
-        $result = array();
-        $result['id_h'] = array();
-        $result['id_t'] = array();
-        $result['nb_chambre'] = array();
-        $result['quartier'] = array();
-        while( $ligne = $resultats->fetch()) // on récupère la liste des habitations par la recherche
-        {
-            $result['id_h'][] = $ligne->id_h;
-            $result['id_t'][] = $ligne->id_t;
-            $result['nb_chambre'][] = $ligne->nb_chambre;
-            $result['id_h'][] = $ligne->id_h;
-            $result['quartier'][] = $ligne->quartier;
-        }
-        $resultats->closeCursor(); // on ferme le curseur des résultats
-        return $result;          
-    }
-
-    function getTypes($id){
-        $connexion = getConnection();
-        $sql="SELECT * FROM Type_h WHERE id_t=$id";
-        $resultats=$connexion->query($sql);
-        $resultats->setFetchMode(PDO::FETCH_OBJ);
-        $result = "";
-
-        while( $ligne = $resultats->fetch()) // on récupère la liste des habitations par la recherche
-        {
-            $result= $ligne->nom;
-        }
-        $resultats->closeCursor(); // on ferme le curseur des résultats
-        return $result;         
-    }
-
-    function getDescri($id){
-        $connexion = getConnection();
-        $sql="SELECT * FROM Description_h WHERE id_h=$id";
-        $resultats=$connexion->query($sql);
-        $resultats->setFetchMode(PDO::FETCH_OBJ);
-        $result = "";
-
-        while( $ligne = $resultats->fetch()) // on récupère la liste des habitations par la recherche
-        {
-            $result= $ligne->descriptions;
-        }
-        $resultats->closeCursor(); // on ferme le curseur des résultats
-        return $result;         
-    }
-
-    function getLoyer($id){
-        $connexion = getConnection();
-        $sql="SELECT * FROM Loyer WHERE id_h=$id";
-        $resultats=$connexion->query($sql);
-        $resultats->setFetchMode(PDO::FETCH_OBJ);
-        $result = array();
-        $result['montant'] = array();
-        $result['daty']=array();
-
-        while( $ligne = $resultats->fetch()) // on récupère la liste des habitations par la recherche
-        {
-            $result['montant'][]= $ligne->montant;
-            $result['daty'][]=$ligne->daty;
-        }
-        $resultats->closeCursor(); // on ferme le curseur des résultats
-        return $result;         
-    }
-
-    function Update($habitat,$loyer,$daty,$descri,$nbr,$quartier,$type){
-        $connexion = getConnection();
-        $sql="UPDATE Loyer SET montant=$loyer AND daty='$daty' WHERE id_h=$habitat";
-        // echo $sql;
-        $connexion->exec($sql);
-        $sql="UPDATE Description_h SET descriptions='$descri' WHERE id_h=$habitat";
-        // echo $sql;
-        $connexion->exec($sql);
-        $sql="UPDATE Habitation SET id_t=$type,nb_chambre=$nbr,quartier='$quartier' WHERE id_h=$habitat";
-        // echo $sql;
-        $connexion->exec($sql);
-    }
-
-
-
-    // function verifyReserve($date1,$date2,$idHab){
-    //     $connexion=getConnection();
-    //     $sql="select Date(arriver) date1, Date(depart) date2 from reservation where id_h=1";
-    //     $resultats=$connexion->query($sql);
-    //     $result = array();
-
-    //     while( $ligne = $resultats->fetch()) // on récupère la liste des habitations par la recherche
-    //     {
-    //         $result[]= $ligne->arriver;
-    //         $result[]=$ligne->depart;
-    //     }
-
-    //     if($result['date1']>=$date1 && $result['date2'<date2]){
-    //         $i=0;
-    //     }
-    //     else{
-    //         $i=1;
-    //     }
-    //     $resultats->closeCursor(); // on ferme le curseur des résultats
-    //     return $result;         
-
-    // }
-
-    // function getCalendar($idHabitat)
-    // {
-    //     $connexion=getConnection();
-    //     $sql="SELECT*FROM Reservation WHERE id_h=$idHabitat";
-    //     $resultats=$connexion->query($sql);
-    //     $resultats->setFetchMode(PDO::FETCH_OBJ);
-    //     $result = array();
-    //     $date
-
-        
-    // }
 
     function est_connect($c){
         session_start();
         $_SESSION['user']=$c;
         return !empty($_SESSION['user']);
     }
-
 ?>

@@ -1,16 +1,19 @@
 <?php
     include("../inc/fonction.php");
+    session_start();
+
     $id_t=$_POST['type'];
-    $nb=$_POST['chambre'];
     $quartier=$_POST['quartier'];
-    $descri=$_POST['descri'];
+    $nb=$_POST['chambre'];
     $loyer=$_POST['loyer'];
-    $daty=$_POST['daty'];
+    $descri=$_POST['descri'];
+    $date=$_POST['daty'];
 
     $habitat=insertHabitat($id_t,$nb,$quartier);
-    insertLoyer($habitat,$loyer,$daty);
-    insertDescriptions($habitat,$descri);
-    
+    $vola=insertLoyer($habitat,$loyer,$date);
+    $desc=insertDescriptions($habitat,$descri);
+
+
     $dossier='../assets/img/';
     $fichier=basename($_FILES['avatar']['name']);
     $taille_maxi = 300000000;
@@ -31,9 +34,8 @@
         //On formate le nom du fichier ici...
         $fichier = strtr($fichier,'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ','AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
         $fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
-        if(move_uploaded_file($_FILES['avatar']['tmp_name'], $dossier . $fichier)) //Si
-        {
-            insertImages($habitat,$fichier);
+        if(move_uploaded_file($_FILES['avatar']['tmp_name'], $dossier . $fichier)){
+            insertImage($habitat,$fichier);
         }
         else
         {
@@ -64,9 +66,8 @@
         //On formate le nom du fichier ici...
         $fichier = strtr($fichier,'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ','AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
         $fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
-        if(move_uploaded_file($_FILES['avatar1']['tmp_name'], $dossier . $fichier)) //Si
-        {
-            insertImages($habitat,$fichier);
+        if(move_uploaded_file($_FILES['avatar1']['tmp_name'], $dossier . $fichier)){
+            insertImage($habitat,$fichier);
         }
         else
         {
@@ -97,9 +98,8 @@
         //On formate le nom du fichier ici...
         $fichier = strtr($fichier,'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ','AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
         $fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
-        if(move_uploaded_file($_FILES['avatar2']['tmp_name'], $dossier . $fichier)) //Si
-        {
-            insertImages($habitat,$fichier);
+        if(move_uploaded_file($_FILES['avatar2']['tmp_name'], $dossier . $fichier)){
+            insertImage($habitat,$fichier);
         }
         else
         {
@@ -109,4 +109,6 @@
     else{
         echo $erreur;
     }
+
+    header('Location:./accueil.php?p=liste');
 ?>

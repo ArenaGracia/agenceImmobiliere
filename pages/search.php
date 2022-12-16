@@ -18,7 +18,7 @@
                         <p><?php echo $liste['montant'][$i] ?>0 Ar</p>
                         <p><a href="accueil.php?p=desc&&id=<?php echo $liste['id_h'][$i]; ?>" class="btn btn-primary" role="button">Voir plus</a></p>
                         <?php if($_SESSION['user']==0) { ?>
-                            <p><a href="accueil.php?p=modif&&id=<?php echo $liste['id_h'][$i]; ?>" class="btn btn-success" role="button">Modify</a></p>
+                            <p><a href="accueil.php?p=supp&&id=<?php echo $liste['id_h'][$i]; ?>" class="btn btn-success" role="button">Modifier</a></p>
                             <p><a href="accueil.php?p=supp&&id=<?php echo $liste['id_h'][$i]; ?>" class="btn btn-danger" role="button">Suppress</a></p>
                         <?php } ?>
                     </div>

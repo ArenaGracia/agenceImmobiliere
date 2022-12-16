@@ -1,6 +1,6 @@
 <?php
     include('../inc/fonction.php');
-    $p=$_GET['id'];
-    suppHabitat($p);
-    header('Location:./accueil.php');
-?> 
+    $indice=$_GET['id'];
+    $supp=suppHabitat($indice);
+    header('Location: ./accueil.php?p=liste');
+?>

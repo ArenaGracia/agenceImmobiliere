@@ -2,7 +2,7 @@
     include("../inc/fonction.php");
     $type=getAllType();
 ?>
-<form action="../traitement/ajouter.php" method="post" enctype="multipart/form-data">
+<form action="ajouter.php" method="post" enctype="multipart/form-data">
             <div class="login2">
                 <h2>Ajouter un nouveau lieu</h2>
                 <div class="input-group input-group-sm">

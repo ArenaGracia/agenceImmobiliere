@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../assets/bootstrap/bootstrap.css">
     <link href="../assets/fonts/glyphicons-halflings-regular.woff">
     <link rel="stylesheet" href="../assets/css/accueil.css">
+    <link rel="stylesheet" href="../assets/css/login.css">
     <title>Document</title>
 </head>
 <body>
@@ -18,8 +19,8 @@
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav" id="ul1">
-                        <li role="presentation" class="<?php if($page == "liste") echo "active"; ?>"><a href="accueil.php?p=liste"><span class="glyphicon glyphicon-list" aria-hidden="true" id="icon"></span></a></a></li>
-                        <li role="presentation" class="<?php if($page == "deconnect") echo "active"; ?>"><a href="accueil.php?p=deconnect"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true" id="icon"></span></a></li>        
+                           <li role="presentation" class="<?php if($page == "liste") echo "active"; ?>"><a href="accueil.php?p=liste"><span class="glyphicon glyphicon-list" aria-hidden="true" id="icon"></span></a></a></li>
+                            <li role="presentation" class="<?php if($page == "deconnect") echo "active"; ?>"><a href="accueil.php?p=deconnect"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true" id="icon"></span></a></li>        
                     </ul>
                     
                     <form class="navbar-form navbar-left" role="search" action="accueil?p=search" method="post" id="search">

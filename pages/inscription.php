@@ -9,7 +9,7 @@
     <title>Document</title>
 </head>
 <body>
-        <form action="../traitement/inscri.php" method="post">
+        <form action="inscri.php" method="post">
             <div class="login">
                 <h2>Inscrivez-vous</h2>
                 <div class="input-group input-group-sm">

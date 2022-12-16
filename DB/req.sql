@@ -10,7 +10,7 @@ CREATE TABLE User(
     num  VARCHAR(30)
 );
 DROP VIEW id_user;
-CREATE VIEW id_user  AS SELECT COUNT(*)+1 FROM User;
+CREATE VIEW id_user  AS SELECT COUNT(*)+1 c FROM User;
 
 INSERT INTO User VALUES((SELECT *FROM id_user),"Arena","arena@gmail.com","arena","032 41 456 89");
 INSERT INTO User VALUES((SELECT *FROM id_user),"Nancy","nancy@gmail.com","nancy","032 42 456 89");
@@ -27,7 +27,7 @@ CREATE TABLE SuperUser(
     num  VARCHAR(30)  
 );
 DROP VIEW id_SuperUser;
-CREATE VIEW id_SuperUser  AS SELECT COUNT(*)+1 FROM SuperUser;
+CREATE VIEW id_SuperUser  AS SELECT COUNT(*)+1 c FROM SuperUser;
 
 INSERT INTO SuperUser VALUES((SELECT *FROM id_SuperUser),"Mimi","mimi@gmail.com","mimi","034 12 123 45");
 
@@ -37,7 +37,7 @@ CREATE TABLE Type_h(
     nom VARCHAR(30)    
 );
 DROP VIEW id_type;
-CREATE VIEW id_type AS SELECT COUNT(*)+1 FROM Type_h;
+CREATE VIEW id_type AS SELECT COUNT(*)+1 c FROM Type_h;
 
 INSERT INTO Type_h VALUES((SELECT *FROM id_type),"Maison");
 INSERT INTO Type_h VALUES((SELECT *FROM id_type),"Studio");
@@ -52,7 +52,7 @@ CREATE TABLE Habitation(
     FOREIGN KEY (id_t) REFERENCES Habitation(id_t) 
 );
 DROP VIEW id_habit;
-CREATE VIEW id_habit AS SELECT COUNT(*)+1 FROM Habitation;
+CREATE VIEW id_habit AS SELECT COUNT(*)+1 c FROM Habitation;
 
 INSERT INTO Habitation VALUES((SELECT *FROM id_habit),1,2,"Antananarivo");
 INSERT INTO Habitation VALUES((SELECT *FROM id_habit),3,4,"Antsirabe");
@@ -80,12 +80,10 @@ CREATE TABLE description_h(
 CREATE TABLE Reservation(
     id_r INTEGER PRIMARY KEY,
     id_h INTEGER,
-    arriver Date,
-    depart Date,
+    arriver TIMESTAMP,
+    depart TIMESTAMP,
     nb_personne INTEGER
 );
-
-CREATE OR REPLACE VIEW id_reserve AS SELECT COUNT(*)+1 FROM Reservation;
 
 INSERT INTO Photo_h VALUES(1,"image1.jpg");
 INSERT INTO Photo_h VALUES(1,"image2.jpg");
@@ -112,6 +110,4 @@ SELECT t.nom,ph.nom_p,h.quartier,h.id_h,l.montant,d.descriptions
     JOIN description_h d ON h.id_h=d.id_h
 GROUP BY h.id_h;
 
-INSERT INTO Reservation VALUES((SELECT*FROM id_reserve),1,'2022-12-01 14:00:10','2023-12-01 14:00:10',1);   
-INSERT INTO Reservation VALUES((SELECT*FROM id_reserve),2,'2022-12-11 14:00:10','2023-12-13 14:00:10',2);   
 

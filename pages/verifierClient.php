@@ -10,9 +10,9 @@
 
     if(est_connect($_SESSION['user']))
     {
-        header('Location:../pages/accueil.php');
+        header('Location:accueil.php');
     }
     else{
-        header('Location:../pages/login.php?retour');
+        header('Location:login.php?retour');
     }
 ?>
