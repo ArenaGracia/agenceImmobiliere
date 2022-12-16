@@ -9,7 +9,6 @@
 
 	<header><h3>Evolution du montant des loyers d` habitation par jour</h3></header>
 
-<<<<<<< HEAD
 	<?php
         include("../inc/fonction.php"); 
 		evolution_MTL_J(10,2022);
@@ -18,11 +17,6 @@
 	<form id="crit">
 		Month<input type="number" id="month" name="month">
 		Year<input type="number" id="year" name="year">
-=======
-	<form id="crit">
-		Month<input type="number" name="month">
-		Year<input type="number" name="year">
->>>>>>> Arena
 		<input type="submit" onclick="evolution_MTL_J()" value="save">
 	</form>
 

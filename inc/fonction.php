@@ -9,79 +9,11 @@
         $connexion->exec($sql);
     }
 
-<<<<<<< HEAD
-    function nb_habitation_par_jour_BASE($_month,$_year){
-        $connexion = getConnection();
-        $sql = "SELECT * FROM reservation
-                         WHERE (SELECT is_In(arriver,depart,".$_month.",".$_year.")) = 1";
-        $result = array();
-        $result['arriver'] = array();
-        $result['depart'] = array();
-        $resultats=$connexion->query($sql);
-        $resultats->setFetchMode(PDO::FETCH_OBJ);
-        while( $ligne = $resultats->fetch()) // on récupère la liste des membres
-        {
-            $result['arriver'][] = $ligne->arriver;
-            $result['depart'][] = $ligne->depart;
-        }
-        $resultats->closeCursor(); // on ferme le curseur des résultats
-        return $result; 
-    }
-
-    function evolution_MTL_J_BASE($_month,$_year){
-        $connexion = getConnection();
-        $sql = "SELECT SUM(montant) AS montant , daty FROM Loyer 
-                       WHERE EXTRACT(MONTH FROM daty)=".$_month." AND EXTRACT(YEAR FROM daty)=".$_year."
-                       GROUP BY daty";
-        $result = array();
-        $result['montant'] = array();
-        $result['daty'] = array();
-        $resultats=$connexion->query($sql);
-        $resultats->setFetchMode(PDO::FETCH_OBJ);
-        while( $ligne = $resultats->fetch()) // on récupère la liste des membres
-        {
-            $result['montant'][] = $ligne->montant;
-            $result['daty'][] = $ligne->daty;
-        }
-        $resultats->closeCursor(); // on ferme le curseur des résultats
-        return $result; 
-    }
-
-    function nb_habitation_par_jour($_month,$_year){
-        $result = nb_habitation_par_jour_BASE($_month,$_year);
-        $xy = [];
-        $xy[0] = array();
-        $xy[1] = array();
-        for($a = 1 ; $a <= 31 ; $a++){                              // 31 jours
-            $xy[0][$a-1] = $a;
-            $xy[1][$a-1] = 0;
-            for($b = 0 ; $b < count($result['arriver']) ; $b++){  
-                if(intval(substr($result['arriver'][$b],8,10)) == $a){ ////////////////// A verifier les 5 et 7
-                    $xy[1][$a-1] += 1;
-                }
-            }
-        }
-        return $xy;
-    }
-
-    function evolution_MTL_J($_month,$_year){
-        $result = evolution_MTL_J_BASE($_month,$_year);
-        $xy = [];
-=======
     function nb_habitation_par_jour($_month,$_year){                // non base
->>>>>>> Arena
         $xy[0] = array();
         $xy[1] = array();
         for($a = 1 ; $a <= 31 ; $a++){      // 31 jours
             $xy[0][] = $a;
-<<<<<<< HEAD
-            $xy[1][] = 0;
-            for($b = 0 ; $b < count($result['daty']) ; $b++){  
-                if(intval(substr($result['daty'][$b],8,10)) == $a){ ////////////////// A verifier les 5 et 7
-                    $xy[1][$a-1] += 1;
-                }
-            }
-=======
             $xy[1][] = $a+10;
         }
         return $xy;
@@ -92,7 +24,6 @@
         for($a = 1 ; $a <= 31 ; $a++){      // 31 jours
             $xy[0][] = $a;
             $xy[1][] = $a+10;
->>>>>>> Arena
         }
         return $xy;
     }
@@ -109,6 +40,7 @@
         $result['id_U'] = array();
         $result['nom'] = array();
         $result['num'] = array();
+        var_dump($sql);
         $resultats=$connexion->query($sql);
         $resultats->setFetchMode(PDO::FETCH_OBJ);
         while( $ligne = $resultats->fetch()) // on récupère la liste des membres

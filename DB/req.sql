@@ -1,3 +1,4 @@
+DROP DATABASE Agence;
 CREATE DATABASE Agence;
 USE Agence;
 
@@ -70,6 +71,15 @@ CREATE TABLE Loyer(
     daty Date,
     FOREIGN KEY (id_h) REFERENCES Habitation(id_h)
 );
+DELETE FROM Loyer;
+INSERT INTO Loyer VALUES(1,10000,'2022-10-10');
+INSERT INTO Loyer VALUES(1,10000,'2022-10-11');
+INSERT INTO Loyer VALUES(1,10000,'2022-10-12');
+INSERT INTO Loyer VALUES(1,10000,'2022-10-13');
+INSERT INTO Loyer VALUES(1,10000,'2022-10-14');
+
+INSERT INTO Loyer VALUES(2,30000,'2022-10-10');
+INSERT INTO Loyer VALUES(2,30000,'2022-10-11');
 
 CREATE TABLE description_h(
     id_h INTEGER,
@@ -84,6 +94,24 @@ CREATE TABLE Reservation(
     depart TIMESTAMP,
     nb_personne INTEGER
 );
+CREATE OR REPLACE VIEW id_r AS SELECT COUNT(*)+1 c FROM Reservation;
+
+DELETE FROM reservation;
+INSERT INTO reservation VALUES((SELECT *FROM id_r),2,'2022-10-10','2023-12-20',12);
+INSERT INTO reservation VALUES((SELECT *FROM id_r),1,'2022-01-10','2022-12-20',12);
+INSERT INTO reservation VALUES((SELECT *FROM id_r),1,'2022-01-10','2022-12-20',12);
+INSERT INTO reservation VALUES((SELECT *FROM id_r),1,'2022-01-10','2022-12-20',12);
+INSERT INTO reservation VALUES((SELECT *FROM id_r),1,'2022-01-10','2022-12-20',12);
+INSERT INTO reservation VALUES((SELECT *FROM id_r),2,'2022-01-10','2022-12-20',12);
+INSERT INTO reservation VALUES((SELECT *FROM id_r),2,'2022-01-10','2022-12-20',12);
+INSERT INTO reservation VALUES((SELECT *FROM id_r),2,'2022-01-10','2022-12-20',12);
+INSERT INTO reservation VALUES((SELECT *FROM id_r),2,'2022-01-10','2022-12-20',12);
+INSERT INTO reservation VALUES((SELECT *FROM id_r),1,'2022-01-10','2023-12-20',12);
+INSERT INTO reservation VALUES((SELECT *FROM id_r),1,'2022-01-10','2023-12-20',12);
+INSERT INTO reservation VALUES((SELECT *FROM id_r),1,'2022-01-10','2023-12-20',12);
+INSERT INTO reservation VALUES((SELECT *FROM id_r),1,'2022-01-10','2024-12-20',12);
+INSERT INTO reservation VALUES((SELECT *FROM id_r),1,'2022-01-10','2024-12-20',12);
+INSERT INTO reservation VALUES((SELECT *FROM id_r),1,'2022-01-10','2024-12-20',12);
 
 INSERT INTO Photo_h VALUES(1,"image1.jpg");
 INSERT INTO Photo_h VALUES(1,"image2.jpg");
@@ -109,5 +137,34 @@ SELECT t.nom,ph.nom_p,h.quartier,h.id_h,l.montant,d.descriptions
     JOIN Loyer l ON h.id_h=l.id_h
     JOIN description_h d ON h.id_h=d.id_h
 GROUP BY h.id_h;
+
+
+DROP FUNCTION is_In;
+DELIMITER $$
+CREATE FUNCTION is_In(arriver TIMESTAMP,depart TIMESTAMP,months INTEGER,years INTEGER)
+    RETURNS 
+        VARCHAR(2) DETERMINISTIC
+    BEGIN 
+        DECLARE  a_year INTEGER;
+        DECLARE  d_year INTEGER;
+        DECLARE a_month INTEGER;
+        DECLARE d_month INTEGER;
+        DECLARE  answer INTEGER;
+        SET a_year = years-EXTRACT(YEAR FROM arriver); 
+        SET d_year = years-EXTRACT(YEAR FROM depart); 
+        SET a_month = months-EXTRACT(MONTH FROM arriver); 
+        SET d_month = months-EXTRACT(MONTH FROM depart);
+        IF a_year*d_year>0 THEN
+            SET answer = 0;
+        ELSEIF a_year=0 AND a_month<0 THEN
+            SET answer = 0;
+        ELSEIF d_year=0  AND d_month>0 THEN
+            SET answer = 0;
+        ELSE 
+            SET answer = 1;
+        END IF;
+        RETURN answer;
+    END$$
+DELIMITER ;
 
 
