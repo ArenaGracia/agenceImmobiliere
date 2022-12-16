@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container">
-        <form action="verifierClient.php" method="post">
+        <form action="../traitement/verifierClient.php" method="post">
             <div class="login">
                 <h2>Connectez-vous cher Client</h2>
                 <div class="input-group input-group-sm">

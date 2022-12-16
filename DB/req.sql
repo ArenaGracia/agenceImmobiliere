@@ -80,10 +80,12 @@ CREATE TABLE description_h(
 CREATE TABLE Reservation(
     id_r INTEGER PRIMARY KEY,
     id_h INTEGER,
-    arriver TIMESTAMP,
-    depart TIMESTAMP,
+    arriver Date,
+    depart Date,
     nb_personne INTEGER
 );
+
+CREATE OR REPLACE VIEW id_reserve AS SELECT COUNT(*)+1 FROM Reservation;
 
 INSERT INTO Photo_h VALUES(1,"image1.jpg");
 INSERT INTO Photo_h VALUES(1,"image2.jpg");
@@ -110,4 +112,6 @@ SELECT t.nom,ph.nom_p,h.quartier,h.id_h,l.montant,d.descriptions
     JOIN description_h d ON h.id_h=d.id_h
 GROUP BY h.id_h;
 
+INSERT INTO Reservation VALUES((SELECT*FROM id_reserve),1,'2022-12-01 14:00:10','2023-12-01 14:00:10',1);   
+INSERT INTO Reservation VALUES((SELECT*FROM id_reserve),2,'2022-12-11 14:00:10','2023-12-13 14:00:10',2);   
 

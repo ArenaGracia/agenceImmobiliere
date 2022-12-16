@@ -11,9 +11,9 @@
     if(est_connect($_SESSION['user']))
     {
         $_SESSION['user']=0;
-        header('Location:accueil.php');
+        header('Location:../pages/accueil.php');
     }
     else{
-        header('Location:loginAdmin.php?retour');
+        header('Location:../pages/loginAdmin.php?retour');
     }
 ?>
