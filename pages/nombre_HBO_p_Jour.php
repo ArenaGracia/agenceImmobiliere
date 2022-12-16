@@ -16,11 +16,13 @@
 
   <header><h3>Nombres' habitation occup&eacute;e(s) par jour </h3></header>
 
+  <form id="crit">
+    Month<input type="number" name="month">
+    Year<input type="number" name="year">
+    <input type="submit" onclick="nombre_HBO_J()" value="save">
+  </form>
+
   <canvas id="bar-chart"  style="margin-left:10%;max-width:80%;"></canvas>
-  
-  Month<input type="number">
-  Year<input type="number">
-  <input type="button" onclick="sendMonthYear()">
 
 </body>
 </html>
