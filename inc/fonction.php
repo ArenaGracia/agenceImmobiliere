@@ -9,6 +9,7 @@
         $connexion->exec($sql);
     }
 
+<<<<<<< HEAD
     function nb_habitation_par_jour_BASE($_month,$_year){
         $connexion = getConnection();
         $sql = "SELECT * FROM reservation
@@ -66,16 +67,32 @@
     function evolution_MTL_J($_month,$_year){
         $result = evolution_MTL_J_BASE($_month,$_year);
         $xy = [];
+=======
+    function nb_habitation_par_jour($_month,$_year){                // non base
+>>>>>>> Arena
         $xy[0] = array();
         $xy[1] = array();
         for($a = 1 ; $a <= 31 ; $a++){      // 31 jours
             $xy[0][] = $a;
+<<<<<<< HEAD
             $xy[1][] = 0;
             for($b = 0 ; $b < count($result['daty']) ; $b++){  
                 if(intval(substr($result['daty'][$b],8,10)) == $a){ ////////////////// A verifier les 5 et 7
                     $xy[1][$a-1] += 1;
                 }
             }
+=======
+            $xy[1][] = $a+10;
+        }
+        return $xy;
+    }
+    function evolution_MTL_J($_month,$_year){                // non base
+        $xy[0] = array();
+        $xy[1] = array();
+        for($a = 1 ; $a <= 31 ; $a++){      // 31 jours
+            $xy[0][] = $a;
+            $xy[1][] = $a+10;
+>>>>>>> Arena
         }
         return $xy;
     }

@@ -14,8 +14,13 @@
   <header><h3>Nombres' habitation occup&eacute;e(s) par jour </h3></header>
 
   <form id="crit">
+<<<<<<< HEAD
     Month<input type="number" id="month" name="month">
     Year<input type="number" id="year" name="year">
+=======
+    Month<input type="number" name="month">
+    Year<input type="number" name="year">
+>>>>>>> Arena
     <input type="submit" onclick="nombre_HBO_J()" value="save">
   </form>
 
