@@ -1,11 +1,10 @@
 <?php
-
     function getConnection(){
         $_hote='localhost';     // le chemin vers le serveur
         $_port='3306';
         $_utilisateur='root';   // nom d'utilisateur pour se connecter
         $_mot_passe='';         // mot de passe de l'utilisateur pour se connecter
-        $_nom_bd='agence';    // le nom de votre base de données
+        $_nom_bd='Agence';    // le nom de votre base de données
 
         $dsn='mysql:host='.$_hote.';port='.$_port.';dbname='.$_nom_bd;
         try {
@@ -16,5 +15,4 @@
             die();
         }
     }
-
 ?>

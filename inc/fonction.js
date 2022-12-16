@@ -1,7 +1,7 @@
 function nombre_HBO_J(){ 
-    avoidPreventDefault("crit");
-    var m_y = can_with_Month_year();
-   if(can_with_Month_year() == false)return;
+  avoidPreventDefault("crit");
+  var m_y = can_with_Month_year();
+  if(m_y == false)return;
     var xhr;                                                        // petit navigateur 
     try {  xhr = new ActiveXObject('Msxml2.XMLHTTP');   }           // les 3 navigateurs
     catch (e) 
@@ -9,26 +9,26 @@ function nombre_HBO_J(){
         try {   xhr = new ActiveXObject('Microsoft.XMLHTTP'); }
         catch (e2) 
         {
-           try {  xhr = new XMLHttpRequest();  }
-           catch (e3) {  xhr = false;   }
-         }
-    }
-  
-    xhr.onreadystatechange  = function() { 
-       if(xhr.readyState  == 4){
-            console.log("okok");
-            if(xhr.status  == 200) {
-                var retour = JSON.parse(xhr.responseText);
-                graphe_bar(retour[0],retour[1],"bar-chart");
-            } else {
-                document.dyn="Error code " + xhr.status;
-            }
+          try {  xhr = new XMLHttpRequest();  }
+          catch (e3) {  xhr = false;   }
         }
-    }; 
+    }
+    var formData = document.getElementById("crit");
+    xhr.onreadystatechange  = function() { 
+      if(xhr.readyState  == 4){
+           if(xhr.status  == 200) {
+               var retour = JSON.parse(xhr.responseText);
+               console.log(retour[1]);
+               graphe_line(retour[0],retour[1],"bar-chart");
+           } else {
+               document.dyn="Error code " + xhr.status;
+           }
+       }
+   }; 
     //XMLHttpRequest.open(method, url, async)
     xhr.open("GET", "../traitement/nb_habitation.php?month="+m_y[0]+"&year="+m_y[1],  true);
     //XMLHttpRequest.send(body)
-    xhr.send(); 
+    xhr.send(formData); 
 }
 function evolution_MTL_J(){ 
     avoidPreventDefault("crit");
@@ -45,10 +45,9 @@ function evolution_MTL_J(){
            catch (e3) {  xhr = false;   }
          }
     }
-  
+    var formData = document.getElementById("crit");
     xhr.onreadystatechange  = function() { 
        if(xhr.readyState  == 4){
-            console.log("okok");
             if(xhr.status  == 200) {
                 var retour = JSON.parse(xhr.responseText);
                 graphe_line(retour[0],retour[1],"line-chart");
@@ -58,9 +57,9 @@ function evolution_MTL_J(){
         }
     }; 
     //XMLHttpRequest.open(method, url, async)
-    xhr.open("GET", "../traitement/nb_habitation.php?month="+m_y[0]+"&year="+m_y[1],  true);
+    xhr.open("GET", "../traitement/evolution_MTL_J.php?month="+m_y[0]+"&year="+m_y[1],  true);
     //XMLHttpRequest.send(body)
-    xhr.send(); 
+   xhr.send(formData); 
 }
 function graphe_bar(xValues,yValues,canvas_id){
     var nb_mois = 31;
@@ -117,12 +116,12 @@ function avoidPreventDefault(forms){
 }
 function can_with_Month_year(){
     var m_y = [];
-    if(document.getElementsByName("month").innerHTML == "" || document.getElementsByName("year").innerHTML == ""){
+    if(document.getElementById("month").value == "" || document.getElementById("year").value == ""){
         alert("Please insert the correct date");
         return false;
     }else{
-        m_y[0] = document.getElementsByName("month").innerHTML;
-        m_y[1] = document.getElementsByName("year").innerHTML;
+        m_y[0] = document.getElementById("month").value;
+        m_y[1] = document.getElementById("year").value;
         return m_y;
     }
 } 
